@@ -1,9 +1,10 @@
 import './App.css';
-import Employee_login from './pages/Employee_login';
+import Login from './pages/login';
+//import Employee_login from './pages/Employee_login';
 function App() {
   return (
     <>
-    <Employee_login/>
+    <Login/>
     </>
   );
 }

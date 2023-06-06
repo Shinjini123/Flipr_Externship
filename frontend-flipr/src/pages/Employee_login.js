@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import styles from "../styles/employeelogin.module.css";
 
-function Employee_login() {
+function EmployeeLogin() {
   const [showForm, setShowForm] = useState(false);
 
   const handleAddEmployeeClick = () => {
@@ -8,58 +9,33 @@ function Employee_login() {
   };
 
   return (
-    <div>
-      <button onClick={handleAddEmployeeClick}>Add Employee</button>
+    <div className={styles["employee-login-container"]}>
+      <button className={styles["add-employee-button"]} onClick={handleAddEmployeeClick}>Add Employee</button>
       {showForm && (
-        <form>  
-        <label htmlFor="name">Name:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-      />
+        <form className={styles["employee-login-form"]}>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" />
+
           <label htmlFor="email">Email ID:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-      />
+          <input type="email" id="email" name="email" />
 
-      <label htmlFor="contactNumber">Contact Number:</label>
-      <input
-        type="tel"
-        id="contactNumber"
-        name="contactNumber"
-      />
+          <label htmlFor="contactNumber">Contact Number:</label>
+          <input type="tel" id="contactNumber" name="contactNumber" />
 
-      <label htmlFor="department">Department:</label>
-      <input
-        type="text"
-        id="department"
-        name="department"
-       
-      />
+          <label htmlFor="department">Department:</label>
+          <input type="text" id="department" name="department" />
 
-      <label htmlFor="joiningDate">Joining Date:</label>
-      <input
-        type="date"
-        id="joiningDate"
-        name="joiningDate"
-        
-      />
+          <label htmlFor="joiningDate">Joining Date:</label>
+          <input type="date" id="joiningDate" name="joiningDate" />
 
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-      />
-          
-  <button type="submit">Submit</button>
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" />
+
+          <button type="submit">Submit</button>
         </form>
       )}
     </div>
   );
 }
 
-export default Employee_login;
+export default EmployeeLogin;
