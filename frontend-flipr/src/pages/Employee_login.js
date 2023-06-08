@@ -1,41 +1,71 @@
-import React, { useState } from "react";
-import styles from "../styles/employeelogin.module.css";
+import React, { useState} from 'react';
+import axios from 'axios';
 
-function EmployeeLogin() {
-  const [showForm, setShowForm] = useState(false);
+const Employee_login = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [department, setDepartment] = useState('');
+  const [joiningDate, setJoiningDate] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleAddEmployeeClick = () => {
-    setShowForm(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('token');
+
+    try {
+      await axios.post(
+        '/api/employees',
+        {
+          name,
+          email,
+          contactNumber,
+          department,
+          joiningDate,
+          password,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      // Reset form fields
+      setName('');
+      setEmail('');
+      setContactNumber('');
+      setDepartment('');
+      setJoiningDate('');
+      setPassword('');
+
+      // Show success message or redirect to employee list page
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
   };
 
   return (
-    <div className={styles["employee-login-container"]}>
-      <button className={styles["add-employee-button"]} onClick={handleAddEmployeeClick}>Add Employee</button>
-      {showForm && (
-        <form className={styles["employee-login-form"]}>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" />
-
-          <label htmlFor="email">Email ID:</label>
-          <input type="email" id="email" name="email" />
-
-          <label htmlFor="contactNumber">Contact Number:</label>
-          <input type="tel" id="contactNumber" name="contactNumber" />
-
-          <label htmlFor="department">Department:</label>
-          <input type="text" id="department" name="department" />
-
-          <label htmlFor="joiningDate">Joining Date:</label>
-          <input type="date" id="joiningDate" name="joiningDate" />
-
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" />
-
-          <button type="submit">Submit</button>
-        </form>
-      )}
+    <div>
+      <h1>Add Employee</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Contact Number"
+          value={contactNumber}
+          onChange={(e) => setContactNumber(e.target.value)}
+        />
+        <input type="text" placeholder="Department" value={department} onChange={(e) => setDepartment(e.target.value)} />
+        <input type="text" placeholder="Joining Date" value={joiningDate} onChange={(e) => setJoiningDate(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Add Employee</button>
+      </form>
     </div>
   );
-}
+};
 
-export default EmployeeLogin;
+export default Employee_login;

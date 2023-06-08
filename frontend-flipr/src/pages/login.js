@@ -1,47 +1,48 @@
 import React, { useState } from 'react';
-import styles from '../styles/login.module.css';
+import axios from 'axios';
 
-function Login() {
-  const [isLoginClicked, setIsLoginClicked] = useState(false);
-  const [isAdminButtonVisible, setIsAdminButtonVisible] = useState(false);
-  const [isEmployeeButtonVisible, setIsEmployeeButtonVisible] = useState(false);
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLoginClick = () => {
-    setIsLoginClicked(true);
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
-  const handleAdminClick = () => {
-    // Perform actions for admin login
-    console.log("Admin login clicked");
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleEmployeeClick = () => {
-    // Perform actions for employee login
-    console.log("Employee login clicked");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('/api/auth/login', { username, password });
+      const { token } = response.data;
+
+      localStorage.setItem('token', token);
+
+      // Redirect to the desired page
+      // Replace '/dashboard' with the appropriate route for your application
+      window.location.href = '/add-employee';
+    } catch (error) {
+      console.error(error);
+      // Handle login error
+    }
   };
 
   return (
-    <div className={styles['login-container']}>
-      <div className={styles['login-form']}>
-        <form>
-          <label htmlFor="username">Username</label>
-          <input name="username" type="text" placeholder="Enter Username" />
-
-          <label htmlFor="password">Password</label>
-          <input name="password" type="password" placeholder="Enter password" />
-
-          <button onClick={handleLoginClick}>Log in</button>
-
-          {isLoginClicked && (
-            <div className={styles['button-container']}>
-              {isAdminButtonVisible && <button onClick={handleAdminClick}>Admin</button>}
-              {isEmployeeButtonVisible && <button onClick={handleEmployeeClick}>Employee</button>}
-            </div>
-          )}
-        </form>
-      </div>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+      <label>Username</label>
+        <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+        <label>Password</label>
+        <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;
