@@ -21,13 +21,9 @@ const Login = () => {
       const { token } = response.data;
 
       localStorage.setItem('token', token);
-
-      // Redirect to the desired page
-      // Replace '/dashboard' with the appropriate route for your application
       window.location.href = '/add-employee';
     } catch (error) {
       console.error(error);
-      // Handle login error
     }
   };
 
