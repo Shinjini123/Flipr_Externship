@@ -32,7 +32,7 @@ const Employee_login = () => {
         }
       );
 
-      // Reset form fields
+
       setName('');
       setEmail('');
       setContactNumber('');
@@ -40,10 +40,8 @@ const Employee_login = () => {
       setJoiningDate('');
       setPassword('');
 
-      // Show success message or redirect to employee list page
     } catch (error) {
       console.error(error);
-      // Handle error
     }
   };
 
