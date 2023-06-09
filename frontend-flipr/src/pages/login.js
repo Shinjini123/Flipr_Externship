@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from '../styles/login.module.css';
 
-const Login = () => {
+const login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,17 +29,29 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-      <label>Username</label>
-        <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
-        <label>Password</label>
-        <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-        <button type="submit">Login</button>
+    <div className={styles['login-container']}>
+      <h1 className={styles['login-title']}>Login</h1>
+      <form className={styles['login-form']} onSubmit={handleSubmit}>
+        <label className={styles['form-label']}>Username</label>
+        <input
+          className={styles['form-input']}
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={handleUsernameChange}
+        />
+        <label className={styles['form-label']}>Password</label>
+        <input
+          className={styles['form-input']}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        <button type="submit" className={styles['login-button']}>Login</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default login;
