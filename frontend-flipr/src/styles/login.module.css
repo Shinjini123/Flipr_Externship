@@ -53,3 +53,26 @@
 .login-button:hover {
   background-color: #0056b3;
 }
+
+.role-select {
+  /* Custom styles for the role dropdown */
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: #2196F3;
+}
+
+
+
+
+
+

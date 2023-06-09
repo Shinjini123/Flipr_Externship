@@ -1,0 +1,35 @@
+.dashboard-container {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-options {
+    margin-top: 20px;
+  }
+  
+  .option-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .option-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .option-item {
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .option-item:hover {
+    text-decoration: underline;
+  }
+  
