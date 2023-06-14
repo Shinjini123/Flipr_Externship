@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../styles/Taskform.module.css'; 
 
 const TaskForm = ({ addTask }) => {
   const [taskDescription, setTaskDescription] = useState('');
@@ -22,7 +23,7 @@ const TaskForm = ({ addTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles['task-form']} onSubmit={handleSubmit}>
       <div>
         <label htmlFor="taskDescription">Task Description:</label>
         <input

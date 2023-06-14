@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../styles/login.module.css';
 import Dashboard from '../components/Dashboard';
@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/auth/login', { username, password });
+      const response = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       const { token, role } = response.data;
 
       localStorage.setItem('token', token);
@@ -38,42 +38,53 @@ const Login = () => {
   };
 
   return (
-      <div className={styles['login-container']}>
-        <h1 className={styles['login-title']}>Login</h1>
-        <form className={styles['login-form']} onSubmit={handleSubmit}>
-          <label className={styles['form-label']}>Username</label>
-          <input
-            className={styles['form-input']}
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
+    <div className={styles['login-container']}>
+      <h1 className={styles['login-title']}>Login</h1>
+      <form className={styles['login-form']} onSubmit={handleSubmit}>
+        <label className={styles['form-label']}>Username</label>
+        <input
+          className={styles['form-input']}
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={handleUsernameChange}
+        />
 
-          <label className={styles['form-label']}>Password</label>
-          <input
-            className={styles['form-input']}
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+        <label className={styles['form-label']}>Password</label>
+        <input
+          className={styles['form-input']}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
 
-          <label className={styles['form-label']}>Role</label>
-          <select className={styles['form-select']} value={role} onChange={handleRoleChange}>
-            <option value="admin">Admin</option>
-            <option value="employee">Employee</option>
-          </select>
+        <label className={styles['form-label']}>Role</label>
+        <select className={styles['form-select']} value={role} onChange={handleRoleChange}>
+          <option value="admin">Admin</option>
+          <option value="employee">Employee</option>
+        </select>
 
-          <button type="submit" className={styles['login-button']}>
-            Login
-          </button>
-        </form>
-      </div>
+        <button type="submit" className={styles['login-button']} onClick={handleSubmit}>
+          Login
+        </button>
+      </form>
 
- 
+      {loggedIn && (
+        <Router>
+          <Routes>
+            <Route path="/admin_dashboard">
+              <Dashboard role={role} />
+            </Route>
+            <Route path="/employee_dashboard">
+              <Employee_dashboard role={role} />
+            </Route>
+            <Navigate to={role === 'admin' ? '/admin_dashboard' : '/employee_dashboard'} />
+          </Routes>
+        </Router>
+      )}
+    </div>
   );
 };
 
 export default Login;
-

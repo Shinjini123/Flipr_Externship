@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import TaskForm from '../components/Taskform';
+import styles from '../styles/Employee_dashboard.module.css';
 
-const Employee_dashboard = () => {
+const EmployeeDashboard = () => {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (newTask) => {
@@ -9,12 +10,12 @@ const Employee_dashboard = () => {
   };
 
   return (
-    <div>
+    <div className={styles.employeeDashboard}>
       <TaskForm addTask={addTask} />
 
-      <ul>
+      <ul className={styles.taskList}>
         {tasks.map((task, index) => (
-          <li key={index}>
+          <li key={index} className={styles.taskItem}>
             <strong>Description:</strong> {task.description}
             <br />
             <strong>Type:</strong> {task.type}
@@ -29,4 +30,4 @@ const Employee_dashboard = () => {
   );
 };
 
-export default Employee_dashboard;
+export default EmployeeDashboard;
