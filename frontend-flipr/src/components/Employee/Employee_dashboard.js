@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import TaskForm from '../components/Taskform';
-import styles from '../styles/Employee_dashboard.module.css';
+import TaskForm from './Taskform';
+import styles from '../styles/EmployeeDashboard.module.css';
+import { Pie } from 'react-chartjs-2';
 
 const EmployeeDashboard = () => {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+    const currentDate = new Date();
+    const taskDate = new Date(newTask.startTime);
+    if (taskDate <= currentDate) {
+      setTasks([...tasks, newTask]);
+    } else {
+      alert('Cannot add tasks for future dates.');
+    }
   };
+
 
   return (
     <div className={styles.employeeDashboard}>
       <TaskForm addTask={addTask} />
+
+      <div className={styles.chartContainer}>
+        <Pie data={getTaskData()} />
+      </div>
 
       <ul className={styles.taskList}>
         {tasks.map((task, index) => (

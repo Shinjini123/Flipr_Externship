@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/login.module.css';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../components/Admin/Dashboard';
 import Employee_login from '../pages/Employee_login';
 
 const login = () => {

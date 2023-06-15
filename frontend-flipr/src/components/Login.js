@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../styles/login.module.css';
-import Dashboard from '../components/Dashboard';
-import Employee_dashboard from '../components/Employee_dashboard';
+import Dashboard from './Admin/Dashboard';
+import Employee_dashboard from './Employee/Employee_dashboard';
 
 const Login = () => {
   const [username, setUsername] = useState('');
