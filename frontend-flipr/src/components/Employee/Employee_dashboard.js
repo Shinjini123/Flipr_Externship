@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TaskForm from './Taskform';
-import styles from '../styles/EmployeeDashboard.module.css';
-import { Pie } from 'react-chartjs-2';
+import styles from '../../styles/Employee_dashboard.module.css';
 
 const EmployeeDashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -21,9 +20,7 @@ const EmployeeDashboard = () => {
     <div className={styles.employeeDashboard}>
       <TaskForm addTask={addTask} />
 
-      <div className={styles.chartContainer}>
-        <Pie data={getTaskData()} />
-      </div>
+      
 
       <ul className={styles.taskList}>
         {tasks.map((task, index) => (
