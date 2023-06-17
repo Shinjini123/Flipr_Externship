@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../models/Task'); // Assuming you have a Task model for interacting with the database
+// Assuming you have a Task model for interacting with the database
 
 // Create a new task
 router.post('/', async (req, res) => {
