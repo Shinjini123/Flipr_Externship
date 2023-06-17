@@ -5,11 +5,12 @@ import Employee_dashboard from './components/Employee/Employee_dashboard';
 import TaskForm from './components/Employee/Taskform';
 import AdminDashboard from './components/Admin/Admin_dashboard';
 import AppRoutes from './AppRoutes'
+import AddEmployee from './components/Admin/AddEmployee';
 
 const App = () => {
   return (
    <>
-  <AppRoutes/>
+  <AddEmployee/>
    </>
   );
 };
