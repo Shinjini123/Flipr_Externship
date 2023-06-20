@@ -10,7 +10,7 @@ import AddEmployee from './components/Admin/AddEmployee';
 const App = () => {
   return (
    <>
-  <AddEmployee/>
+  <AppRoutes/>
    </>
   );
 };
