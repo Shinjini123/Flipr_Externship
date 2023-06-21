@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
-import axios from 'axios';
 import styles from '../styles/login.module.css';
-import Dashboard from './Admin/Dashboard';
-import Employee_dashboard from './Employee/Employee_dashboard';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('admin');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,28 +14,21 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
+  const handleLogin = () => {
+    // Perform authentication or other login logic if required
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { username, password });
-      const { token, role } = response.data;
-
-      localStorage.setItem('token', token);
-      setLoggedIn(true);
-    } catch (error) {
-      console.error(error);
+    // Redirect to the selected role's dashboard using history.push
+    if (selectedRole === 'admin') {
+      window.location.href = '/admin_dashboard';
+    } else if (selectedRole === 'employee') {
+      window.location.href = '/employee_dashboard';
     }
   };
 
   return (
     <div className={styles['login-container']}>
       <h1 className={styles['login-title']}>Login</h1>
-      <form className={styles['login-form']} onSubmit={handleSubmit}>
+      <form className={styles['login-form']} onSubmit={handleLogin}>
         <label className={styles['form-label']}>Username</label>
         <input
           className={styles['form-input']}
@@ -59,30 +47,27 @@ const Login = () => {
           onChange={handlePasswordChange}
         />
 
-        <label className={styles['form-label']}>Role</label>
-        <select className={styles['form-select']} value={role} onChange={handleRoleChange}>
-          <option value="admin">Admin</option>
-          <option value="employee">Employee</option>
-        </select>
+        <div className={styles['role-buttons']}>
+          <button
+            type="button"
+            className={styles['role-button']}
+            onClick={() => setSelectedRole('admin')}
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            className={styles['role-button']}
+            onClick={() => setSelectedRole('employee')}
+          >
+            Employee
+          </button>
+        </div>
 
-        <button type="submit" className={styles['login-button']} onClick={handleSubmit}>
+        <button type="submit" className={styles['login-button']}>
           Login
         </button>
       </form>
-
-      {loggedIn && (
-        <Router>
-          <Routes>
-            <Route path="/admin_dashboard">
-              <Dashboard role={role} />
-            </Route>
-            <Route path="/employee_dashboard">
-              <Employee_dashboard role={role} />
-            </Route>
-            <Navigate to={role === 'admin' ? '/admin_dashboard' : '/employee_dashboard'} />
-          </Routes>
-        </Router>
-      )}
     </div>
   );
 };

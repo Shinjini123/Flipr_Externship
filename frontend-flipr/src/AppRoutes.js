@@ -1,19 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from '../src/components/Admin/Admin_dashboard';
-import EmployeeDashboard from '../src/components/Employee/Employee_dashboard';
-import Login from '../src/components/Login';
+import Login from './components/Login';
+import AdminDashboard from './components/Admin/Admin_dashboard';
+import EmployeeDashboard from './components/Employee/Employee_dashboard';
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/admin_dashboard" component={Dashboard} />
-        <Route path="/employee_dashboard" component={EmployeeDashboard} />
-        <Route path="/" component={Login} />
+        <Route exact path="/" element={<Login/>} />
+        <Route path="/admin_dashboard" element={<AdminDashboard/>} />
+        <Route path="/employee_dashboard" element={<EmployeeDashboard/>} />
       </Routes>
     </Router>
   );
 };
 
 export default AppRoutes;
+
