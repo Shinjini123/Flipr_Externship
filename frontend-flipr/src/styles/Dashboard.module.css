@@ -29,7 +29,6 @@
     cursor: pointer;
   }
   
-  .option-item:hover {
-    text-decoration: underline;
-  }
+    text-decoration: underline
+
   
